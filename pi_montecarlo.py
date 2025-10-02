@@ -10,14 +10,17 @@ from typing import Tuple
 def ratio(point: Tuple[float, float]) -> float:
     return point[0]**2 + point[1]**2
 
-def get_pi(n=1000) -> float:
+def get_pi(n=1000, iter=10) -> float:
 
-    points_in_square = [(random(), random()) for _ in range(n)]
-    points_in_circle = [point for point in points_in_square if ratio(point) < 1]
-
-    return 4 * len(points_in_circle) / len(points_in_square)
+    pis = []
+    for _ in range(iter):
+        points_in_square = [(random(), random()) for _ in range(n)]
+        points_in_circle = [point for point in points_in_square if ratio(point) < 1]
+        pis.append(4 * len(points_in_circle) / len(points_in_square))
+    
+    return sum(pis) / len(pis)
 
 
 if __name__ == "__main__":
 
-    print(get_pi(1000000))
+    print(get_pi(n=10**6, iter=5))
