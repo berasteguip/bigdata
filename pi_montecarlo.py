@@ -1,3 +1,4 @@
+import time
 from random import random
 from typing import Tuple
 
@@ -23,4 +24,13 @@ def get_pi(n=1000, iter=10) -> float:
 
 if __name__ == "__main__":
 
-    print(get_pi(n=10**6, iter=5))
+
+    with open("pi_montecarlo_results.csv", "w") as f:
+        
+        for k in (5, 10, 50):
+
+            t0= time.time()
+            n = k * 10**6
+            pi = get_pi(n=n, iter=1)
+            total_time = time.time() - t0
+
