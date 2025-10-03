@@ -27,10 +27,13 @@ if __name__ == "__main__":
 
     with open("pi_montecarlo_results.csv", "w") as f:
         
+        f.write("n,pi,time\n")
         for k in (5, 10, 50):
-
-            t0= time.time()
             n = k * 10**6
+            print(f"Calculating pi with n={n} points")
+            t0= time.time()
             pi = get_pi(n=n, iter=1)
             total_time = time.time() - t0
+            print(f"n={n}, pi={pi}, time={total_time}")
+            f.write(f"{n},{pi},{round(total_time, 3)}\n")
 
