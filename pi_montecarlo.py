@@ -40,4 +40,5 @@ if __name__ == "__main__":
     pi = get_pi(n=n, iter=iter)
     total_time = time.time() - t0
 
+    print(f"Pi is {pi}, calculated in {total_time} seconds")
     
