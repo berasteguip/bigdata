@@ -24,23 +24,20 @@ def get_pi(n=1000, iter=10) -> float:
 
 
 if __name__ == "__main__":
-
-
-    with open("pi_montecarlo_results.csv", "w") as f:
         
-        f.write("n,pi,time\n")
-        if len(sys.argv) == 2:
-            n = int(sys.argv[1])
-            iter = 1
-        elif len(sys.argv) == 3:
-            n = int(sys.argv[1])
-            iter = int(sys.argv[2])
-        else:
-            n = 1000
-            iter = 1
-        print(f"Calculating pi with n={n} points, iter={iter} times")
-        t0= time.time()
-        pi = get_pi(n=n, iter=iter)
-        total_time = time.time() - t0
-        print(f"pi={pi}")
-        f.write(f"{n},{pi},{round(total_time, 3)}\n")
+    
+    if len(sys.argv) == 2:
+        n = int(sys.argv[1])
+        iter = 1
+    elif len(sys.argv) == 3:
+        n = int(sys.argv[1])
+        iter = int(sys.argv[2])
+    else:
+        n = 1000
+        iter = 1
+    print(f"Calculating pi with n={n} points, iter={iter} times")
+    t0= time.time()
+    pi = get_pi(n=n, iter=iter)
+    total_time = time.time() - t0
+
+    
