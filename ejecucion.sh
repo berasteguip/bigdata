@@ -4,7 +4,7 @@
 output="resultados.csv"
 
 # Escribe la cabecera
-echo "n,r,resultado" > "$output"
+echo "n,pi,time, vel" > "$output"
 
 # Bucle doble
 for n in 5000000 10000000 50000000; do
@@ -14,7 +14,7 @@ for n in 5000000 10000000 50000000; do
     result=$(python3 pi_montecarlo.py "$n" "1")
     
     # Añadir una línea al CSV
-    echo "$n,$result" >> "$output"
+    echo "$result" >> "$output"
 done
 
 echo "Ejecuciones completadas. Resultados guardados en $output"
