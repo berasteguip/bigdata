@@ -15,7 +15,6 @@ for n in 5000000 10000000 50000000; do
     
     # Añadir una línea al CSV
     echo "$n,$result" >> "$output"
-  done
 done
 
 echo "Ejecuciones completadas. Resultados guardados en $output"
