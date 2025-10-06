@@ -36,9 +36,8 @@ if __name__ == "__main__":
         n = 1000
         iter = 1
     print(f"Calculating pi with n={n} points, iter={iter} times")
-    t0= time.time()
+    t0 = time.time()
     pi = get_pi(n=n, iter=iter)
     total_time = time.time() - t0
 
     print(f"Pi is {pi}, calculated in {total_time} seconds")
-    
