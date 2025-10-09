@@ -4,7 +4,7 @@
 output="resultados.csv"
 
 # Escribe la cabecera
-echo "n,pi,time, vel" > "$output"
+echo "n,pi,time,vel" > "$output"
 
 # Bucle doble
 for n in 5000000 10000000 50000000; do

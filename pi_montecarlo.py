@@ -40,4 +40,4 @@ if __name__ == "__main__":
     total_time = time.time() - t0
     vel = n / total_time
 
-    print(n, pi, total_time, vel)
+    print(f"{n},{pi},{total_time},{vel}")
