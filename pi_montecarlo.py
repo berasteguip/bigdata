@@ -30,7 +30,7 @@ def point_in_circle(n: int) -> int:
 
 def pi_montecarlo(n) -> float:
         
-    futures = [point_in_circle.remote(n=n/N_TASKS) for _ in range(N_TASKS)]
+    futures = [point_in_circle.remote(n=n//N_TASKS) for _ in range(N_TASKS)]
     results = ray.get(futures)
     total_points_in_circle = sum(results)
 
