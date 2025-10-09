@@ -20,15 +20,23 @@ def ratio(point: Tuple[float, float]) -> float:
 N_TASKS = 200
 
 @ray.remote
-def pi_montecarlo(n=1000, iter=1) -> float:
+def point_in_circle(n: int) -> int:
 
-    pis = []
-    for _ in range(iter):
-        points_in_square = [(random(), random()) for _ in range(n)]
-        points_in_circle = [point for point in points_in_square if ratio(point) < 1]
-        pis.append(4 * len(points_in_circle) / len(points_in_square))
+    total_points = [(random(), random()) for _ in range(n)]
+    points_in_circle = [point for point in total_points if ratio(point) < 1]
     
-    return sum(pis) / len(pis)
+    return len(points_in_circle)
+
+
+def pi_montecarlo(n) -> float:
+        
+    futures = [point_in_circle.remote(n=n/N_TASKS) for _ in range(N_TASKS)]
+    results = ray.get(futures)
+    total_points_in_circle = sum(results)
+
+    pi = 4 * total_points_in_circle / n
+    
+    return pi
 
 
 def execution(params: List[int]) -> None:
@@ -36,10 +44,8 @@ def execution(params: List[int]) -> None:
     results = []
     for n in params:
         t0 = time.time()
-        pi_futures = [pi_montecarlo.remote(n=n) for _ in range(N_TASKS)]
-        pi_results = ray.get(pi_futures)
+        pi = pi_montecarlo(n)
         total_time = time.time() - t0
-        pi = sum(pi_results) / N_TASKS
         vel = n / total_time
 
         results.append({
