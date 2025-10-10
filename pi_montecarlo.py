@@ -27,7 +27,6 @@ def point_in_circle(n: int) -> int:
     
     return len(points_in_circle)
 
-
 def pi_montecarlo(n) -> float:
         
     futures = [point_in_circle.remote(n=n//N_TASKS) for _ in range(N_TASKS)]
@@ -37,7 +36,6 @@ def pi_montecarlo(n) -> float:
     pi = 4 * total_points_in_circle / n
     
     return pi
-
 
 def execution(params: List[int]) -> None:
 
