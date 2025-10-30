@@ -18,10 +18,11 @@ def ratio(point: Tuple[float, float]) -> float:
 
 N_TASKS = 200
 
-def point_in_circle(n: int) -> int:
+def point_in_circle(n: int, task_id: int = 0) -> int:
 
-    np.random.seed()  # Asegura diferentes semillas en cada worker
-
+    
+    np.random.seed(int(time.time_ns()) % (2**32 - 1) + task_id)
+    print(print(f"Generating {n} random points"))
     x = np.random.rand(n)
     y = np.random.rand(n)
     inside = int(np.sum(x**2 + y**2 <= 1))
@@ -29,7 +30,7 @@ def point_in_circle(n: int) -> int:
     
 def pi_montecarlo(n) -> float:
     per_task = n // N_TASKS
-    futures = [client.submit(point_in_circle, per_task) for _ in range(N_TASKS)]
+    futures = [client.submit(point_in_circle, per_task, i) for i in range(N_TASKS)]
     results = client.gather(futures)
     total_points_in_circle = sum(results)
     pi = 4 * total_points_in_circle / (per_task * N_TASKS)
