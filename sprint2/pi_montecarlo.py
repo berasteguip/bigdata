@@ -20,10 +20,11 @@ N_TASKS = 200
 
 def point_in_circle(n: int, task_id: int = 0) -> int:
 
-    
     np.random.seed(int(time.time_ns()) % (2**32 - 1) + task_id)
     print(print(f"Generating {n} random points"))
     x = np.random.rand(n)
+
+    np.random.seed(int(time.time_ns()) % (2**32 - 1) + task_id)
     y = np.random.rand(n)
     inside = int(np.sum(x**2 + y**2 <= 1))
     return inside
