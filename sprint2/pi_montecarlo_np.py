@@ -1,3 +1,7 @@
+"""
+Ejecución con numpy arrays
+"""
+
 import time
 import pandas as pd
 from random import random, Random
@@ -52,9 +56,13 @@ def execution(params: List[int]) -> None:
             "vel": vel,
             "precision": abs((pi - math.pi) / math.pi)
         })
+        print(f"\nNumero total de puntos: {n}")
+        print(f"Estimacion de pi: {pi:.6f}")
+        print(f"Tiempo de proceso: {total_time:.2f} s")
+
     df = pd.DataFrame(results)
-    df.to_csv('resultados_dask.csv', index=False)
-    print('Results saved to resultados_dask.csv')
+    df.to_csv('resultados_dask_np.csv', index=False)
+    print('Results saved to resultados_dask_np.csv')
 
 if __name__ == "__main__":
     params = [5*10**6, 10*10**6, 50*10**6]
